@@ -25,9 +25,9 @@ source ../install-git-lfs.sh
 source ../pip-install-deps.sh
 ```
 
-## Configure TPS
+## Configure and build TPS
 
-Make sure to set-up the enviroment
+Make sure to set up the environment (this is also needed to run tps applications)
 ```
 cd tps-venv/
 source bin/activate
@@ -45,3 +45,5 @@ cd build-gpu
 make -j 6
 make -j 6 check TESTS="vpath.sh"
 ```
+
+Note `make check` gets stuck on the compute note (I guess because of calls to `mpirun` that should be replaced by `ibrun`.
