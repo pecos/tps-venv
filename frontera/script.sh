@@ -77,11 +77,12 @@ cp /opt/apps/gcc9_1/impi19_0/phdf5/1.10.4/x86_64/include/*.h $INSTALL_DIR/includ
 cp /opt/apps/gcc9_1/impi19_0/phdf5/1.10.4/x86_64/lib/*.so $INSTALL_DIR/lib
 cp /opt/apps/gcc9_1/impi19_0/phdf5/1.10.4/x86_64/lib/*.so* $INSTALL_DIR/lib
 
-
+cd $INSTALL_DIR
 echo export MASA_DIR=$MASA_DIR > export_env
 echo export GRVY_DIR=$GRVY_DIR >> export_env
 echo export GSLIB_DIR=$GSLIB_DIR >> export_env
 echo export HYPRE_DIR=$HYPRE_DIR >> export_env
 echo export METIS_DIR=$METIS_DIR >> export_env
 echo export MFEM_DIR=$MFEM_DIR >> export_env
-echo export MY_LD_LIBRARY_PATH=$INSTALL_DIR/lib:$LD_LIBRARY_PATH >> export_env
+echo export CUDA_HOME=$TACC_CUDA_DIR >> export_env
+echo export EXTRA_LD_LIBRARY_PATH=$INSTALL_DIR/lib >> export_env
