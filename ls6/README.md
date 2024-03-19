@@ -35,7 +35,7 @@ cd tps
 ./bootstrap
 mkdir build-gpu
 cd build-gpu
-../configure CUDA_ARCH=sm_75 --disable-valgrind --enable-gpu-cuda --enable-pybind11 --with-cuda=$CUDA_HOME
+../configure CUDA_ARCH=sm_80 --disable-valgrind --enable-gpu-cuda --enable-pybind11 --with-cuda=$CUDA_HOME
 make -j 6
 make -j 6 check TESTS="vpath.sh"
 ```
