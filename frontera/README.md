@@ -29,13 +29,15 @@ source ../pip-install-deps.sh
 
 with chaning your working directory to `tps-venv`
 
-### Method 1
+### Install tps + boltzmann + tps-inputs
+
+You would need access to tps, bte, and tps-intputs repos.
+
 ```
 source ../install-tps-bte.sh
 ```
 
-
-### Method 2
+### Install tps only
 
 Make sure to set up the environment (this is also needed to run tps applications)
 ```
