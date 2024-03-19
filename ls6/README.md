@@ -16,7 +16,7 @@ This script generates the file `$INSTALL_DIR/export_env` which defines some key 
 
 ### Issues:
 - I can not build `cudf` and `cuml`.
-- Because of the Giles's GPU course, I could not access a GPU node on ls6 to check the exectution.
+- Because of Giles's GPU course, this was executed only on a single GPU
 
 ## Configure and build TPS
 
