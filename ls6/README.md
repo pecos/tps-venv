@@ -4,7 +4,7 @@
 
 ```
 ./script.sh # creates export_env, install c++ and pip dependencies
-source ./install-git-lfs.sh
+./install-git-lfs.sh
 ```
 
 ## Configure and build TPS
