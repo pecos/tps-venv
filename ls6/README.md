@@ -2,7 +2,7 @@
 
 ## Build dependencies
 
-Install `python3.11`, build and install all c/c++ dependencies, build and install all pip dependencies.
+Install `python3.12`, build and install all c/c++ dependencies, build and install all pip dependencies.
 The build directory - where source code is downloaded and built - is `WDIR=$ROOT_DIR/build`; the install directory is
 `INSTALL_DIR=$ROOT_DIR/tps-env`, where `$ROOT_DIR` is the current directory where the script was launched.
 
