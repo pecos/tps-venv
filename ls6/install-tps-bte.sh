@@ -19,6 +19,6 @@ cd $TPS_DIR
 ./bootstrap
 mkdir build-gpu
 cd build-gpu
-../configure CUDA_ARCH=$cuda_arch --disable-valgrind --enable-gpu-cuda --enable-pybind11 --with-cuda=$CUDA_HOME
+../configure CUDA_ARCH=$cuda_arch --disable-valgrind --enable-gpu-cuda --enable-pybind11 --with-cuda=$CUDA_HOME CPPFLAGS=-I$(python3 -c "import pybind11; print(pybind11.get_include())")
 make -j $make_cores
 make -j $make_cores  check TESTS="vpath.sh"

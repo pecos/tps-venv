@@ -102,6 +102,7 @@ echo export GSLIB_DIR=$GSLIB_DIR >> export_env
 echo export HYPRE_DIR=$HYPRE_DIR >> export_env
 echo export METIS_DIR=$METIS_DIR >> export_env
 echo export MFEM_DIR=$MFEM_DIR >> export_env
+echo export HDF5_DIR=$HDF5_DIR >> export_env
 echo export CUDA_HOME=$TACC_CUDA_DIR >> export_env
 echo export cuda_arch=$cuda_arch >> export_env
 echo export EXTRA_LD_LIBRARY_PATH=$INSTALL_DIR/lib >> export_env
