@@ -1,3 +1,5 @@
+# Requires ROOT_DIR INSTALL_DIR and WDIR to be set
+
 export PYINSTALL_DIR=$INSTALL_DIR/.python
 cd $WDIR
 wget https://www.python.org/ftp/python/3.12.2/Python-3.12.2.tgz
@@ -7,7 +9,7 @@ cd Python-3.12.2
 ./configure --prefix=$PYINSTALL_DIR --enable-optimizations --with-lto --with-computed-gotos --with-system-ffi --enable-shared
 make -j $make_cores
 make altinstall
-cd $WDIR
+cd $ROOT_DIR
 
 export PATH=$PYINSTALL_DIR/bin:$PATH
 export LD_LIBRARY_PATH=$PYINSTALL_DIR/lib:$PYINSTALL_DIR/lib64:$LD_LIBRARY_PATH
