@@ -27,9 +27,18 @@ source ../pip-install-deps.sh
 
 ## Configure and build TPS
 
+with chaning your working directory to `tps-venv`
+
+### Method 1
+```
+source ../install-tps-bte.sh
+```
+
+
+### Method 2
+
 Make sure to set up the environment (this is also needed to run tps applications)
 ```
-cd tps-venv/
 source bin/activate
 source ../load_modules.sh
 source export_env
