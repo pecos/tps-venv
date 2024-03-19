@@ -3,7 +3,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 INSTALL_DIR=$(pwd)/tps-env
 WDIR=$(pwd)/build
 make_cores=6
-cuda_arch_number=75
+cuda_arch_number=80
 
 set -e
 
