@@ -1,3 +1,5 @@
+source $INSTALL_DIR/bin/activate
+
 mpi4py_ver=3.1.5
 python --version
 pip install --upgrade pip
@@ -18,4 +20,4 @@ git submodule update --init --recursive
 CC=$MPICC CXX=$MPICXX make all -j ${make_cores}
 
 cd $SCRIPT_DIR
-pip install --extra-index-url=https://pypi.nvidia.com cudf-cu12==24.2.* cuml-cu12==24.2.*
+#pip install --extra-index-url=https://pypi.nvidia.com cudf-cu11==24.2.* cuml-cu11==24.2.*
