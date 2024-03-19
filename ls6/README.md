@@ -14,6 +14,10 @@ Note: `python3.11` is installed in `$INSTALL_DIR/.python`
 
 This script generates the file `$INSTALL_DIR/export_env` which defines some key environment variables to build `tps`.
 
+### Issues:
+- I can not build `cudf` and `cuml`.
+- Because of the Giles's GPU course, I could not access a GPU node on ls6 to check the exectution.
+
 ## Configure and build TPS
 
 Make sure to set up the environment (this is also needed to run tps applications)
