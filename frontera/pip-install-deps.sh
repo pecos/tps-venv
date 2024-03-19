@@ -11,3 +11,14 @@ wget https://github.com/mpi4py/mpi4py/releases/download/$mpi4py_ver/mpi4py-$mpi4
 && python setup.py build --mpicc=$MPICC && python setup.py install
 cd $WDIR
 
+git clone git@github.com:ut-parla/parla-experimental.git
+cd parla-experimental
+git submodule update --init --recursive
+CC=gcc CXX=g++ make all -j4
+
+cd $WDIR
+pip install --extra-index-url=https://pypi.nvidia.com cudf-cu12==24.2.* cuml-cu12==24.2.*
+
+
+
+
