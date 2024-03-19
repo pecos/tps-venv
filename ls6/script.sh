@@ -1,7 +1,7 @@
 #!/bin/bash -x
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 INSTALL_DIR=$(pwd)/tps-env
-WDIR=$INSTALL_DIR/build
+WDIR=$(pwd)/build
 make_cores=6
 cuda_arch_number=75
 
@@ -10,12 +10,15 @@ set -e
 source $SCRIPT_DIR/load_modules.sh
 module list
 
+rm -rf $WDIR
+rm -rf $INSTALL_DIR
+
 mkdir $WDIR
 mkdir $INSTALL_DIR
 
 
-source build_python.sh
-python -m venv tps-env .
+source install-python.sh
+python3 -m venv tps-env $INSTALL_DIR
 
 # MASA LOCAL INSTALL
 cd $WDIR
@@ -96,3 +99,7 @@ echo export METIS_DIR=$METIS_DIR >> export_env
 echo export MFEM_DIR=$MFEM_DIR >> export_env
 echo export CUDA_HOME=$TACC_CUDA_DIR >> export_env
 echo export EXTRA_LD_LIBRARY_PATH=$INSTALL_DIR/lib >> export_env
+
+cd $SCRIPT_DIR
+
+source ./pip-install-deps.sh

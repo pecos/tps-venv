@@ -9,7 +9,10 @@ make -j $make_cores
 make altinstall
 cd $WDIR
 
-$INSTALL_DIR/.python/bin/python3.12 -m pip install --upgrade pip setuptools wheel
+export PATH=$PYINSTALL_DIR/bin:$PATH
+export LD_LIBRARY_PATH=$PYINSTALL_DIR/lib:$PYINSTALL_DIR/lib64:$LD_LIBRARY_PATH
+
+python3.12 -m pip install --upgrade pip setuptools wheel
 
 ln -s $PYINSTALL_DIR/bin/python3.12          $PYINSTALL_DIR/bin/python3
 ln -s $PYINSTALL_DIR/bin/python3.12          $PYINSTALL_DIR/bin/python
@@ -19,6 +22,4 @@ ln -s $PYINSTALL_DIR/bin/pydoc3.12           $PYINSTALL_DIR/bin/pydoc
 ln -s $PYINSTALL_DIR/bin/idle3.12            $PYINSTALL_DIR/bin/idle
 ln -s $PYINSTALL_DIR/bin/python3.12-config   $PYINSTALL_DIR/bin/python-config
 
-export PATH=$PYINSTALL_DIR/bin:$PATH
-export LD_LIBRAR_PATH=$PYINSTALL_DIR/lib:$PYINSTALL_DIR/lib64:$LD_LIBRARY_PATH
-
+python3 -V
