@@ -101,3 +101,5 @@ echo export CUDA_HOME=$TACC_CUDA_DIR >> export_env
 echo export EXTRA_LD_LIBRARY_PATH=$INSTALL_DIR/lib >> export_env
 
 cd $SCRIPT_DIR
+
+source ./pip-install-deps.sh

@@ -1,5 +1,4 @@
 mpi4py_ver=3.1.5
-WDIR=$(pwd)
 python --version
 pip install --upgrade pip
 pip install cython psutil scikit-build nvtx
