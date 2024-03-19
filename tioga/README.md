@@ -10,6 +10,7 @@ Note: `python3.12` is installed in `$INSTALL_DIR/.python`
 
 ```
 ./script.sh # creates export_env, install c++ and pip dependencies
+./pip-install-deps.sh # install all python dependencies
 ```
 
 This script generates the file `$INSTALL_DIR/export_env` which defines some key environment variables to build `tps`.
@@ -38,7 +39,7 @@ cd build-gpu
 export MPI_DIR=/usr/tce/packages/cray-mpich-tce/cray-mpich-8.1.21-rocmcc-5.4.1-cce-15.0.0c
 export RESOLVE_CRAY_LIB=/usr/tce/packages/cce-tce/cce-15.0.0c/cce/x86_64/lib/
 export LD_LIBRARY_PATH=$RESOLVE_CRAY_LIB:$LD_LIBRARY_PATH
-../configure --enable-gpu-hip HIP_ARCH=gfx90a --disable-valgrind --enable-pybind11 CXXFLAGS="-g -03" 
+../configure --enable-gpu-hip HIP_ARCH=gfx90a --disable-valgrind --enable-pybind11 CPPFLAGS=-I$(python3 -c "import pybind11; print(pybind11.get_include())") 
 make -j 6
 make -j 6 check TESTS="vpath.sh"
 ```

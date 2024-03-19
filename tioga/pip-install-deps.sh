@@ -1,4 +1,17 @@
+#!/bin/bash -x
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ROOT_DIR=$(pwd)
+INSTALL_DIR=$ROOT_DIR/tps-env
+WDIR=$ROOT_DIR/build
+make_cores=6
+hip_arch=gfx90a
+
+set -e
+
+
 source $INSTALL_DIR/bin/activate 
+source $INSTALL_DIR/export_env
+
 mpi4py_ver=3.1.5
 python --version
 pip install --upgrade pip
@@ -7,7 +20,7 @@ pip install numpy scipy  matplotlib numba multiprocess "pybind11[global]" lxcat_
 
 export HCC_AMDGPU_TARGET=$hip_arch
 export CUPY_INSTALL_USE_HIP=1
-pip install cupy --verbose --no-cache-dir --no-binary :all:
+#pip install cupy --verbose --no-cache-dir --no-binary :all:
 
 MPICC=$(command -v mpicc)
 MPICXX=$(command -v mpicxx)
