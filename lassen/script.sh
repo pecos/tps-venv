@@ -75,14 +75,14 @@ cd metis-5.1.0 && \
     make -j ${make_cores} && make install
 cd $ROOT_DIR
 
-#cd $WDIR
-#export HDF5_DIR=$INSTALL_DIR
-#wget https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/HDF5/HDF5_1_12_2/source/hdf5-1.12.2.tar.gz
-#tar -xvf hdf5-1.12.2.tar.gz
-#cd hdf5-1.12.2 && \
-#CC=mpicc ./configure --enable-parallel --prefix=$INSTALL_DIR && \
-#make -j ${make_cores} && make install
-#cd $ROOT_DIR
+cd $WDIR
+export HDF5_DIR=$INSTALL_DIR
+wget https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/HDF5/HDF5_1_12_2/source/hdf5-1.12.2.tar.gz
+tar -xvf hdf5-1.12.2.tar.gz
+cd hdf5-1.12.2 && \
+CC=mpicc ./configure --enable-parallel --prefix=$INSTALL_DIR && \
+make -j ${make_cores} && make install
+cd $ROOT_DIR
 
 cd $WDIR
 mfem_ver="4.5.2"
@@ -106,7 +106,7 @@ echo export GRVY_DIR=$GRVY_DIR >> export_env
 echo export GSLIB_DIR=$GSLIB_DIR >> export_env
 echo export HYPRE_DIR=$HYPRE_DIR >> export_env
 echo export METIS_DIR=$METIS_DIR >> export_env
-#echo export HDF5_DIR=$HDF5_DIR >> export_env
+echo export HDF5_DIR=$HDF5_DIR >> export_env
 echo export MFEM_DIR=$MFEM_DIR >> export_env
 echo export cuda_arch=$cuda_arch >> export_env
 echo export EXTRA_LD_LIBRARY_PATH=$INSTALL_DIR/lib >> export_env
