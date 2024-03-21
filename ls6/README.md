@@ -2,17 +2,22 @@
 
 ## Build dependencies
 
-Install `python3.12`, build and install all c/c++ dependencies, build and install all pip dependencies.
-The build directory - where source code is downloaded and built - is `WDIR=$ROOT_DIR/build`; the install directory is
-`INSTALL_DIR=$ROOT_DIR/tps-env`, where `$ROOT_DIR` is the current directory where the script was launched.
+Install `python3.12`, build and install all c/c++ dependencies, and build and install all pip dependencies.
+
+Directories:
+- `ROOT_DIR`: The directory the script was launched from.
+- `WDIR=$ROOT_DIR/build`: The directory where source code is downloaded, untarred, and built
+- `INSTALL_DIR=$ROOT_DIR/tps-env`: The directory where libraries, executables, and includes are installed. This is also where the python virtual environment is located
 
 Note: `python3.12` is installed in `$INSTALL_DIR/.python`
 
+To build all dependencies 
 ```
-./script.sh # creates export_env, install c++ and pip dependencies
+./script.sh # creates export_env, install c/c++  dependencies
+./pip-install-deps.sh # install pip dependencies
 ```
 
-This script generates the file `$INSTALL_DIR/export_env` which defines some key environment variables to build `tps`.
+The script `script.sh` generates the file `$INSTALL_DIR/export_env` which defines some key environment variables to build `tps`.
 
 ### Issues:
 - I can not build `cudf` and `cuml`.
@@ -23,9 +28,7 @@ This script generates the file `$INSTALL_DIR/export_env` which defines some key 
 Make sure to set up the environment (this is also needed to run tps applications)
 
 ```
-source load_modules.sh
-source tps-venv/bin/activate
-source export_env
+source startup-env.sh
 ```
 
 Configure and build tps
