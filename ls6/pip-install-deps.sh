@@ -22,12 +22,13 @@ MPICC=$(command -v mpicc)
 MPICXX=$(command -v mpicxx)
 cd $WDIR
 wget https://github.com/mpi4py/mpi4py/releases/download/$mpi4py_ver/mpi4py-$mpi4py_ver.tar.gz \
-&& tar -zxf mpi4py-$mpi4py_ver.tar.gz && cd mpi4py-$mpi4py_ver \
+&& rm -rf  mpi4py-$mpi4py_ver && tar -zxf mpi4py-$mpi4py_ver.tar.gz && cd mpi4py-$mpi4py_ver \
 && python setup.py build --mpicc=$MPICC && python setup.py install
 cd $ROOT_DIR
 python -c "import mpi4py"
 
 cd $WDIR
+rm -rf parla-experimental
 git clone git@github.com:ut-parla/parla-experimental.git
 cd parla-experimental
 git submodule update --init --recursive
@@ -35,4 +36,4 @@ CC=$MPICC CXX=$MPICXX make all -j ${make_cores}
 cd $ROOT_DIR
 python -c "import parla"
 
-#pip install --extra-index-url=https://pypi.nvidia.com cudf-cu11==24.2.* cuml-cu11==24.2.*
+#pip install --verbose --extra-index-url=https://pypi.nvidia.com cudf-cu11==24.2.* cuml-cu11==24.2.*
