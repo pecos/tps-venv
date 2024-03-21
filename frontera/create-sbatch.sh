@@ -14,6 +14,7 @@ python3 gen_par.py --ngpus_per_node=4 --solver_type="transient" --out_fname="ts"
 cd $WDIR
 
 cat >run.sbatch<<EOF
+#!/bin/bash
 #----------------------------------------------------
 # Sample Slurm job script
 #   for TACC Frontera CLX nodes
