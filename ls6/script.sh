@@ -109,6 +109,3 @@ echo export EXTRA_LD_LIBRARY_PATH=$INSTALL_DIR/lib >> export_env
 
 cd $ROOT_DIR
 
-source $SCRIPT_DIR/pip-install-deps.sh
-
-cd $ROOT_DIR
