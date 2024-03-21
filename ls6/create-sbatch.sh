@@ -1,15 +1,14 @@
 #!/bin/bash -x
 WDIR=$(pwd)
-TPS_DIR=$WDIR/tps-venv/tps
-TPS_INPUTS_DIR=$WDIR/tps-venv/tps/tps-inputs/axisymmetric/argon/lowP/six-species-maxwell-rates
+TPS_DIR=$WDIR/tps
+TPS_INPUTS_DIR=$WDIR/tps/tps-inputs/axisymmetric/argon/lowP/six-species-maxwell-rates
 cd $TPS_INPUTS_DIR
 
 echo $(pwd)
 ls
 
-#python3 gen_par.py --ngpus_per_node=4 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 256 256 128 64 32 16 8 4 -node_count 1 2 4 8 16 32 64 128
-
-python3 gen_par.py --ngpus_per_node=4 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 256 256 128 64 32 16 8 4 -node_count 1 2 4 8 16 32 64 128
+python3 gen_par.py --ngpus_per_node=3 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 512 256 128 64 -node_count 1 2 4 8 16
+#python3 gen_par.py --ngpus_per_node=3 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 512 256 128 64   -node_count 1 2 4 8 16
 
 cd $WDIR
 
@@ -48,15 +47,15 @@ cat >run.sbatch<<EOF
 
 # Any other commands must follow all #SBATCH directives...
 source load_modules.sh
-source tps-venv/bin/activate
-source tps-venv/export_env
+source tps-env/bin/activate
+source tps-env/export_env
 
 module list
 pwd
 date
 
 WDIR=\$(pwd)
-TPS_DIR=\$WDIR/tps-venv/tps
+TPS_DIR=\$WDIR/tps
 
 cd \$TPS_DIR
 mkdir -p build-gpu && cd build-gpu
