@@ -18,6 +18,9 @@ module list
 export ROCM_HOME=/opt/rocm-${ROCM_VER}
 
 # Note: module rocmcc-tce will not add shared libraries to ld_library_path
+export RESOLVE_CRAY_LIB=/usr/tce/packages/cce-tce/cce-15.0.0c/cce/x86_64/lib/
+
+export LD_LIBRARY_PATH=$RESOLVE_CRAY_LIB:$LD_LIBRARY_PATH
 
 #Preset python path for the future
 export PATH=$LOAD_MODULES_SCRIPT_DIR/tps-env/.python/bin:$PATH
