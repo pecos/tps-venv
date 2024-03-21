@@ -12,8 +12,17 @@ module load rocmcc-tce/${ROCM_VER}-cce-${CCE_VER}
 module load cray-mpich-tce/${MPICH_VER}
 module list
 
-export ROCM_HOME=/usr/tce/packages/rocmcc-tce/rocmcc-5.4.1-cce-15.0.0c
+#Export ROCM_HOME (using some dark magic)
+#$(grep COMPILER_DIR $(command -v hipcc)) && export ROCM_HOME=$COMPILER_DIR && unset COMPILER_DIR
+
+export ROCM_HOME=/opt/rocm-${ROCM_VER}
+
+# Note: module rocmcc-tce will not add shared libraries to ld_library_path
+export RESOLVE_CRAY_LIB=/usr/tce/packages/cce-tce/cce-15.0.0c/cce/x86_64/lib/
+
+export LD_LIBRARY_PATH=$RESOLVE_CRAY_LIB:$LD_LIBRARY_PATH
 
 #Preset python path for the future
 export PATH=$LOAD_MODULES_SCRIPT_DIR/tps-env/.python/bin:$PATH
 export LD_LIBRARY_PATH=$LOAD_MODULES_SCRIPT_DIR/tps-env/.python/lib:$LD_LIBRARY_PATH
+
