@@ -70,6 +70,9 @@ git checkout restart_output-plasma.sol.h5
 git checkout ../six-species-maxwell-rates-x4/restart_output-plasma-x4.sol.h5
 git checkout ../six-species-maxwell-rates-x16/restart_output-plasma-x16.sol.h5
 
+cp ../six-species-maxwell-rates-x4/restart_output-plasma-x4.sol.h5 . 
+cp ../six-species-maxwell-rates-x16/restart_output-plasma-x16.sol.h5 . 
+
 python3 --version
 export PARLA_NUM_THREADS=8  
 
