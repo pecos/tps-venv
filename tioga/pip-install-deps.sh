@@ -16,7 +16,7 @@ mpi4py_ver=3.1.5
 python --version
 pip install --upgrade pip
 pip install cython==0.29.37 psutil scikit-build 
-pip install numpy scipy  matplotlib numba multiprocess "pybind11[global]" lxcat_data_parser
+pip install numpy scipy  matplotlib sympy numba multiprocess "pybind11[global]" lxcat_data_parser
 
 MPICC=$(command -v mpicc)
 MPICXX=$(command -v mpicxx)
