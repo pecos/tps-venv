@@ -10,9 +10,9 @@ cd $TPS_INPUTS_DIR
 echo $(pwd)
 ls
 
-python3 gen_par.py --ngpus_per_node=4 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 512 256 256 128 64 32 16 8 -node_count 1 2 4 8 16 32 64 128
+python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x4.ini --ngpus_per_node=4 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 512 256 128 64 32 -node_count 1 2 4 8 16
 
-#python3 gen_par.py --ngpus_per_node=4 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 512 256 256 128 64 32 16 8 -node_count 1 2 4 8 16 32 64 128
+#python3 gen_par.py --ngpus_per_node=4 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 512 256 128 64 32 -node_count 1 2 4 8 16
 
 cd $WDIR
 
@@ -70,11 +70,13 @@ cd \$WDIR
 PAR_FILE_HOME=\$TPS_DIR/tps-inputs/axisymmetric/argon/lowP/six-species-maxwell-rates
 cd \$PAR_FILE_HOME
 git checkout restart_output-plasma.sol.h5
+git checkout ../six-species-maxwell-rates-x4/restart_output-plasma-x4.sol.h5
+git checkout ../six-species-maxwell-rates-x16/restart_output-plasma-x16.sol.h5
 
 python3 --version
 export PARLA_NUM_THREADS=8  
 
-ibrun ./../../../../../build-gpu/src/tps-bte_0d3v.py -run plasma.6sp.tps2boltzmann_ss_$1.ini
+ibrun ./../../../../../build-gpu/src/tps-bte_0d3v.py -run plasma.6sp.tps2boltzmann.x4.$1.ini
 cd \$WDIR
 EOF
 # chmod +x run.sbatch
