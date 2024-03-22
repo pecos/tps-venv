@@ -1,5 +1,8 @@
 #!/bin/bash -x
 WDIR=$(pwd)
+source $WDIR/tps-venv/bin/activate
+python3 --version
+
 TPS_DIR=$WDIR/tps-venv/tps
 TPS_INPUTS_DIR=$WDIR/tps-venv/tps/tps-inputs/axisymmetric/argon/lowP/six-species-maxwell-rates
 cd $TPS_INPUTS_DIR
@@ -7,9 +10,9 @@ cd $TPS_INPUTS_DIR
 echo $(pwd)
 ls
 
-#python3 gen_par.py --ngpus_per_node=4 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 256 256 128 64 32 16 8 4 -node_count 1 2 4 8 16 32 64 128
+python3 gen_par.py --ngpus_per_node=4 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 512 256 256 128 64 32 16 8 -node_count 1 2 4 8 16 32 64 128
 
-python3 gen_par.py --ngpus_per_node=4 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 256 256 128 64 32 16 8 4 -node_count 1 2 4 8 16 32 64 128
+#python3 gen_par.py --ngpus_per_node=4 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps-venv/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 512 256 256 128 64 32 16 8 -node_count 1 2 4 8 16 32 64 128
 
 cd $WDIR
 
