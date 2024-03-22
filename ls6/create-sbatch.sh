@@ -1,5 +1,8 @@
 #!/bin/bash -x
 WDIR=$(pwd)
+source load_modules.sh
+source $WDIR/tps-env/bin/activate
+
 TPS_DIR=$WDIR/tps
 TPS_INPUTS_DIR=$WDIR/tps/tps-inputs/axisymmetric/argon/lowP/six-species-maxwell-rates
 cd $TPS_INPUTS_DIR
