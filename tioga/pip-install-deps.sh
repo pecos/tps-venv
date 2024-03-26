@@ -6,16 +6,19 @@ WDIR=$ROOT_DIR/build
 make_cores=6
 hip_arch=gfx90a
 
+cython_ver=0.29.37
+mpi4py_ver=3.1.5
+cupy_ver=12.2
+
 set -e
 
 source $SCRIPT_DIR/load_modules.sh
 source $INSTALL_DIR/bin/activate 
 source $INSTALL_DIR/export_env
 
-mpi4py_ver=3.1.5
 python --version
 pip install --upgrade pip
-pip install cython==0.29.37 psutil scikit-build 
+pip install cython==$cython_ver psutil scikit-build 
 pip install numpy scipy  matplotlib sympy numba multiprocess "pybind11[global]" lxcat_data_parser
 
 MPICC=$(command -v mpicc)
@@ -45,7 +48,7 @@ export CUPY_INSTALL_USE_HIP=1
 export LD_LIBRARY_PATH_SWAP=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$ROCM_HOME/lib:$LD_LIBRARY_PATH
 echo $ROCM_HOME
-pip install cupy
+pip install cupy==$cupy_ver
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SWAP
 python -c "import cupy"
 
