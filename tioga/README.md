@@ -46,3 +46,38 @@ make -j 6 check TESTS="vpath.sh"
 
 
 To build all the stack, you can also use `./install-tps-bte.sh`
+
+## Tests
+
+Profile BTE on a single GPU
+
+```
+source startup-env.sh
+flux submit -N 1 -t 1.5h --output=bte_run_single_gpu.log ./bte_run_single_gpu.sh 
+```
+
+Run TPS+BTE Strong Scaling
+```
+source startup-env.sh
+./tps-bte-create-input.sh
+for nn in 1 2 4 8 16; do flux submit -N $nn -n $(($nn*4)) -t 1h --output=tps-bte_${nn}.log ./tps-bte-scaling.sh $nn; done
+```
+
+Note: To run the strong scaling you'll need to explicitly patch TPS
+```
+diff --git a/src/equation_of_state.cpp b/src/equation_of_state.cpp
+index 1e03825e..cc75b5c8 100644
+--- a/src/equation_of_state.cpp
++++ b/src/equation_of_state.cpp
+@@ -619,6 +619,7 @@ MFEM_HOST_DEVICE double PerfectMixture::computeBackgroundMassDensity(const doubl
+ 
+   // assert(rhoB >= 0.0);
+   if (rhoB < 0.) {
++    rhoB = 0.0;          
+     // grvy_printf(GRVY_ERROR, "\nNegative background density -> %f\n", rhoB);
+     printf("\nERROR: Negative background density -> %f\n", rhoB);
+ #ifdef _GPU_
+```
+
+## TODO:
+[ ] Build `metaphysicl` for full `masa` support
