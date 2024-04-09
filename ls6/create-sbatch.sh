@@ -10,11 +10,18 @@ cd $TPS_INPUTS_DIR
 echo $(pwd)
 ls
 
-python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x16.ini --ngpus_per_node=3 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 512 256 128 64 -node_count 1 2 4 8 16
-a=ss
+# python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x16.ini --ngpus_per_node=3 --solver_type="steady-state" --out_fname="ss" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 512 256 128 64 -node_count 1 2 4 8 16
+# a=ss
 
-#python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x16.ini --ngpus_per_node=3 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 512 256 128 64 -node_count 1 2 4 8 16
-#a=ts
+# python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x16.ini --ngpus_per_node=3 --solver_type="transient" --out_fname="ts" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 512 256 128 64 -node_count 1 2 4 8 16
+# a=ts
+
+python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x1.ini --ngpus_per_node=3 --solver_type="transient" --out_fname="ts_ws" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 -node_count 1
+
+python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x4.ini --ngpus_per_node=3 --solver_type="transient" --out_fname="ts_ws" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 -node_count 4
+
+python3 gen_par.py --par_fname=plasma.6sp.tps2boltzmann.x16.ini --ngpus_per_node=3 --solver_type="transient" --out_fname="ts_ws" --lxcat=$WDIR/tps/boltzmann/BESolver/python/lxcat_data/eAr_crs.6sp_Tg_0.5eV -sub_clusters 1024 -node_count 16
+a=ts_ws
 
 cd $WDIR
 
@@ -81,7 +88,7 @@ cp ../six-species-maxwell-rates-x16/restart_output-plasma-x16.sol.h5 .
 python3 --version
 export PARLA_NUM_THREADS=8  
 
-ibrun ./../../../../../build-gpu/src/tps-bte_0d3v.py -run plasma.6sp.tps2boltzmann.x16.$a.$1.ini
+ibrun ./../../../../../build-gpu/src/tps-bte_0d3v.py -run plasma.6sp.tps2boltzmann.x1.$a.$1.ini
 cd \$WDIR
 EOF
 # chmod +x run.sbatch
