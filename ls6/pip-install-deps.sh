@@ -14,7 +14,7 @@ mpi4py_ver=3.1.5
 python --version
 pip install --upgrade pip
 pip install cython==0.29.37 psutil scikit-build nvtx
-pip install numpy scipy  matplotlib cupy-cuda11x numba multiprocess "pybind11[global]" lxcat_data_parser
+pip install numpy scipy sympy matplotlib cupy-cuda11x numba multiprocess "pybind11[global]" lxcat_data_parser
 
 python -c "import cupy"
 
