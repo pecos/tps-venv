@@ -1,7 +1,7 @@
 #!/bin/bash -x
 INSTALL_DIR=$(pwd)
 WDIR=$INSTALL_DIR/build
-make_cores=6
+make_cores=16
 cuda_arch_number=75
 
 source bin/activate
@@ -50,7 +50,8 @@ wget  https://github.com/hypre-space/hypre/archive/refs/tags/v2.26.0.tar.gz \
 cd $WDIR
 
 export METIS_DIR=$INSTALL_DIR
-wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
+wget https://karypis.github.io/glaros/files/sw/metis/metis-5.1.0.tar.gz
+#wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
 tar -xvf metis-5.1.0.tar.gz
 cd metis-5.1.0 && \
     make config prefix=$METIS_DIR shared=1 && \
