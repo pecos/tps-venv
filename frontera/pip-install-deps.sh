@@ -3,7 +3,8 @@ WDIR=$(pwd)
 python --version
 pip install --upgrade pip
 pip install cython psutil scikit-build nvtx
-pip install numpy scipy  matplotlib cupy-cuda12x numba multiprocess "pybind11[global]" lxcat_data_parser
+pip install numpy scipy  matplotlib cupy-cuda12x numba multiprocess "pybind11[global]" lxcat_data_parser sympy
+pip install h5py
 
 MPICC=$(command -v mpicc)
 wget https://github.com/mpi4py/mpi4py/releases/download/$mpi4py_ver/mpi4py-$mpi4py_ver.tar.gz \

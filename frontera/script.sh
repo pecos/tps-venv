@@ -62,14 +62,25 @@ mfem_ver="4.5.2"
 mfem_prefix=$INSTALL_DIR
 wget https://github.com/mfem/mfem/archive/refs/tags/v$mfem_ver.tar.gz && tar xvf v$mfem_ver.tar.gz
 
-cd mfem-$mfem_ver \
-    && unset MFEM_DIR \
-    && make pcuda CUDA_ARCH=sm_${cuda_arch_number} PREFIX=$mfem_prefix \
-       MFEM_DEBUG=NO STATIC=NO SHARED=YES \
-       HYPRE_OPT="-I$HYPRE_INC" HYPRE_LIB="-L$HYPRE_LIB -lHYPRE" \
-       MFEM_USE_METIS_5=YES METIS_OPT="-I$METIS_DIR/include" METIS_LIB="-L$METIS_DIR/lib -lmetis" \
-       MFEM_USE_GSLIB=YES GSLIB_OPT="-I$GSLIB_DIR/include" GSLIB_LIB="-L$GSLIB_DIR/lib -lgs" -j ${make_cores}\
-       && cd examples && make -j ${make_cores} && cd .. && make install
+cd mfem-$mfem_ver && unset MFEM_DIR
+
+## uncomment below to build mfem with CUDA backend
+# make pcuda CUDA_ARCH=sm_${cuda_arch_number} PREFIX=$mfem_prefix \
+#        MFEM_DEBUG=NO STATIC=NO SHARED=YES \
+#        HYPRE_OPT="-I$HYPRE_INC" HYPRE_LIB="-L$HYPRE_LIB -lHYPRE" \
+#        MFEM_USE_METIS_5=YES METIS_OPT="-I$METIS_DIR/include" METIS_LIB="-L$METIS_DIR/lib -lmetis" \
+#        MFEM_USE_GSLIB=YES GSLIB_OPT="-I$GSLIB_DIR/include" GSLIB_LIB="-L$GSLIB_DIR/lib -lgs" -j ${make_cores}\
+#        && cd examples && make -j ${make_cores} && cd .. && make install
+# cd $WDIR
+
+make parallel PREFIX=$mfem_prefix\
+    MFEM_DEBUG=NO STATIC=NO SHARED=YES\
+    HYPRE_OPT="-I$HYPRE_INC"\
+    HYPRE_LIB="-L$HYPRE_LIB -lHYPRE" \
+    MFEM_USE_METIS_5=YES METIS_OPT="-I$METIS_DIR/include" METIS_LIB="-L$METIS_DIR/lib -lmetis"\
+    MFEM_USE_GSLIB=YES GSLIB_OPT="-I$GSLIB_DIR/include" GSLIB_LIB="-L$GSLIB_DIR/lib -lgs" -j ${make_cores}
+
+cd examples && make -j ${make_cores} && cd .. && make install
 cd $WDIR
 
 export MFEM_DIR=$mfem_prefix
