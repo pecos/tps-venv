@@ -8,7 +8,7 @@ hip_arch=gfx90a
 
 cython_ver=0.29.37
 mpi4py_ver=3.1.5
-cupy_ver=12.2
+cupy_ver=13.5.1
 
 set -e
 
@@ -31,17 +31,17 @@ wget https://github.com/mpi4py/mpi4py/releases/download/$mpi4py_ver/mpi4py-$mpi4
 cd $ROOT_DIR
 python -c "import mpi4py"
 
-cd $WDIR
-rm -rf parla-experimental
-git clone git@github.com:ut-parla/parla-experimental.git
-cd parla-experimental
-git submodule update --init --recursive
-CC=$MPICC CXX=$MPICXX pip install . --config-settings=cmake.define.PARLA_ENABLE_HIP=ON 
-cd $ROOT_DIR
-export LD_LIBRARY_PATH_SWAP=$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$ROCM_HOME/lib:$LD_LIBRARY_PATH
-python -c "import parla"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SWAP
+#cd $WDIR
+#rm -rf parla-experimental
+#git clone git@github.com:ut-parla/parla-experimental.git
+#cd parla-experimental
+#git submodule update --init --recursive
+#CC=$MPICC CXX=$MPICXX pip install . --config-settings=cmake.define.PARLA_ENABLE_HIP=ON 
+#cd $ROOT_DIR
+#export LD_LIBRARY_PATH_SWAP=$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$ROCM_HOME/lib:$LD_LIBRARY_PATH
+#python -c "import parla"
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SWAP
 
 export HCC_AMDGPU_TARGET=$hip_arch
 export CUPY_INSTALL_USE_HIP=1

@@ -29,7 +29,7 @@ cd $ROOT_DIR
 
 export BOOST_DIR=$INSTALL_DIR
 cd $WDIR
-wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz
+wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz 
 tar xfz boost_1_80_0.tar.gz
 cp -r boost_1_80_0/boost $BOOST_DIR/include
 cd $ROOT_DIR
@@ -68,7 +68,7 @@ cd $ROOT_DIR
 
 cd $WDIR
 export METIS_DIR=$INSTALL_DIR
-wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
+wget https://karypis.github.io/glaros/files/sw/metis/metis-5.1.0.tar.gz 
 tar -xvf metis-5.1.0.tar.gz
 cd metis-5.1.0 && \
     make config prefix=$METIS_DIR shared=1 && \
