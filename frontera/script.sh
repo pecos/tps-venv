@@ -1,7 +1,7 @@
 #!/bin/bash -x
 INSTALL_DIR=$(pwd)
 WDIR=$INSTALL_DIR/build
-make_cores=6
+make_cores=16
 cuda_arch_number=75
 
 source bin/activate
@@ -50,7 +50,8 @@ wget  https://github.com/hypre-space/hypre/archive/refs/tags/v2.26.0.tar.gz \
 cd $WDIR
 
 export METIS_DIR=$INSTALL_DIR
-wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
+wget https://karypis.github.io/glaros/files/sw/metis/metis-5.1.0.tar.gz
+#wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
 tar -xvf metis-5.1.0.tar.gz
 cd metis-5.1.0 && \
     make config prefix=$METIS_DIR shared=1 && \
@@ -61,14 +62,25 @@ mfem_ver="4.5.2"
 mfem_prefix=$INSTALL_DIR
 wget https://github.com/mfem/mfem/archive/refs/tags/v$mfem_ver.tar.gz && tar xvf v$mfem_ver.tar.gz
 
-cd mfem-$mfem_ver \
-    && unset MFEM_DIR \
-    && make pcuda CUDA_ARCH=sm_${cuda_arch_number} PREFIX=$mfem_prefix \
-       MFEM_DEBUG=NO STATIC=NO SHARED=YES \
-       HYPRE_OPT="-I$HYPRE_INC" HYPRE_LIB="-L$HYPRE_LIB -lHYPRE" \
-       MFEM_USE_METIS_5=YES METIS_OPT="-I$METIS_DIR/include" METIS_LIB="-L$METIS_DIR/lib -lmetis" \
-       MFEM_USE_GSLIB=YES GSLIB_OPT="-I$GSLIB_DIR/include" GSLIB_LIB="-L$GSLIB_DIR/lib -lgs" -j ${make_cores}\
-       && cd examples && make -j ${make_cores} && cd .. && make install
+cd mfem-$mfem_ver && unset MFEM_DIR
+
+## uncomment below to build mfem with CUDA backend
+# make pcuda CUDA_ARCH=sm_${cuda_arch_number} PREFIX=$mfem_prefix \
+#        MFEM_DEBUG=NO STATIC=NO SHARED=YES \
+#        HYPRE_OPT="-I$HYPRE_INC" HYPRE_LIB="-L$HYPRE_LIB -lHYPRE" \
+#        MFEM_USE_METIS_5=YES METIS_OPT="-I$METIS_DIR/include" METIS_LIB="-L$METIS_DIR/lib -lmetis" \
+#        MFEM_USE_GSLIB=YES GSLIB_OPT="-I$GSLIB_DIR/include" GSLIB_LIB="-L$GSLIB_DIR/lib -lgs" -j ${make_cores}\
+#        && cd examples && make -j ${make_cores} && cd .. && make install
+# cd $WDIR
+
+make parallel PREFIX=$mfem_prefix\
+    MFEM_DEBUG=NO STATIC=NO SHARED=YES\
+    HYPRE_OPT="-I$HYPRE_INC"\
+    HYPRE_LIB="-L$HYPRE_LIB -lHYPRE" \
+    MFEM_USE_METIS_5=YES METIS_OPT="-I$METIS_DIR/include" METIS_LIB="-L$METIS_DIR/lib -lmetis"\
+    MFEM_USE_GSLIB=YES GSLIB_OPT="-I$GSLIB_DIR/include" GSLIB_LIB="-L$GSLIB_DIR/lib -lgs" -j ${make_cores}
+
+cd examples && make -j ${make_cores} && cd .. && make install
 cd $WDIR
 
 export MFEM_DIR=$mfem_prefix

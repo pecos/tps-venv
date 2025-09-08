@@ -18,8 +18,8 @@ python3.12 -m pip install --upgrade pip setuptools wheel
 
 ln -s $PYINSTALL_DIR/bin/python3.12          $PYINSTALL_DIR/bin/python3
 ln -s $PYINSTALL_DIR/bin/python3.12          $PYINSTALL_DIR/bin/python
-ln -s $PYINSTALL_DIR/bin/pip3.12             $PYINSTALL_DIR/bin/pip3
-ln -s $PYINSTALL_DIR/bin/pip3.12             $PYINSTALL_DIR/bin/pip
+#ln -s $PYINSTALL_DIR/bin/pip3.12             $PYINSTALL_DIR/bin/pip3
+#ln -s $PYINSTALL_DIR/bin/pip3.12             $PYINSTALL_DIR/bin/pip
 ln -s $PYINSTALL_DIR/bin/pydoc3.12           $PYINSTALL_DIR/bin/pydoc
 ln -s $PYINSTALL_DIR/bin/idle3.12            $PYINSTALL_DIR/bin/idle
 ln -s $PYINSTALL_DIR/bin/python3.12-config   $PYINSTALL_DIR/bin/python-config
