@@ -26,7 +26,7 @@ cd $WDIR
 export MASA_DIR=$INSTALL_DIR
 git clone https://github.com/dreamer2368/MASA.git masa
 cd masa && git checkout 887d5e26e3865bd6415503d62f9a557bbd3da4dc
-./boostrap && ./configure --prefix=$MASA_DIR && make -j ${make_cores} && make install
+./bootstrap && ./configure --prefix=$MASA_DIR && make -j ${make_cores} && make install
 cd $ROOT_DIR
 
 export BOOST_DIR=$INSTALL_DIR
@@ -35,6 +35,7 @@ wget https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.gz
 tar xfz boost_1_87_0.tar.gz
 cp -r boost_1_87_0/boost $BOOST_DIR/include
 cd $ROOT_DIR
+export BOOST_LIB_VERSION=187
 
 export GRVY_DIR=$INSTALL_DIR
 cd $WDIR
