@@ -26,7 +26,7 @@ cd $WDIR
 export MASA_DIR=$INSTALL_DIR
 git clone https://github.com/dreamer2368/MASA.git masa
 cd masa && git checkout 887d5e26e3865bd6415503d62f9a557bbd3da4dc
-./bootstrap && ./configure --prefix=$MASA_DIR && make -j ${make_cores} && make install
+./bootstrap && CC=gcc CXX=g++ ./configure --prefix=$MASA_DIR && make -j ${make_cores} && make install
 cd $ROOT_DIR
 
 export BOOST_DIR=$INSTALL_DIR
